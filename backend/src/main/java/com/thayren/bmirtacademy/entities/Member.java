@@ -19,7 +19,7 @@ public class Member implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
-
+	private Integer age;
 	private Double height;
 	private Double weight;
 	private Double bmi;
@@ -32,9 +32,10 @@ public class Member implements Serializable {
 	public Member() {
 	}
 
-	public Member(Long id, String name, Double height, Double weight, Double bmi, String rank, Trainer trainer) {
+	public Member(Long id, String name, Integer age, Double height, Double weight, Double bmi, String rank, Trainer trainer) {
 		this.id = id;
 		this.name = name;
+		this.age = age;
 		this.height = height;
 		this.weight = weight;
 		this.bmi = bmi;
@@ -56,6 +57,14 @@ public class Member implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public Double getHeight() {

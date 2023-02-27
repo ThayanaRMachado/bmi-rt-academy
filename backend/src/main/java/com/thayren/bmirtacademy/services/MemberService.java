@@ -2,7 +2,10 @@ package com.thayren.bmirtacademy.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thayren.bmirtacademy.dto.MemberDTO;
 import com.thayren.bmirtacademy.entities.Member;
 import com.thayren.bmirtacademy.repositories.MemberRepository;
+import com.thayren.bmirtacademy.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class MemberService {
@@ -29,7 +33,7 @@ public class MemberService {
 	@Transactional(readOnly = true)
 	public MemberDTO findById(Long id) {
 		Optional<Member> obj = repository.findById(id);
-		Member entity = obj.get();
+		Member entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 
 		return new MemberDTO(entity);
 	}
@@ -47,17 +51,26 @@ public class MemberService {
 
 	@Transactional
 	public MemberDTO update(Long id, MemberDTO memberDto) {
-		Member entity = repository.getOne(id);
-		copyDtoToEntity(memberDto, entity);
-		entity.calculateBMI(entity.getHeight(), entity.getWeight());
-		entity.calculateRank(entity.getBmi());
-		entity = repository.save(entity);
+		try {
+			Member entity = repository.getOne(id);
+			copyDtoToEntity(memberDto, entity);
+			entity.calculateBMI(entity.getHeight(), entity.getWeight());
+			entity.calculateRank(entity.getBmi());
+			entity = repository.save(entity);
 
-		return new MemberDTO(entity);
+			return new MemberDTO(entity);
+
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
 	}
 
 	public void delete(Long id) {
+		try {
 			repository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
 	}
 
 	private void copyDtoToEntity(MemberDTO memberDto, Member entity) {

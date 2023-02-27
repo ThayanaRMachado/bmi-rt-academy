@@ -2,6 +2,11 @@ package com.thayren.bmirtacademy.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
+import com.sun.istack.NotNull;
 import com.thayren.bmirtacademy.entities.Member;
 import com.thayren.bmirtacademy.entities.Trainer;
 
@@ -9,9 +14,21 @@ public class MemberDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
+
+	@Size(min = 5, max = 60, message = "O nome deve ter entre 5 a 60 caracteres")
+	@NotBlank(message = "Campo requerido")
 	private String name;
+
+	@Positive(message = "A idade deve ser um valor positivo")
+	@NotNull
 	private Integer age;
+
+	@Positive(message = "A altura deve ser um valor positivo")
+	@NotNull
 	private Double height;
+
+	@Positive(message = "O peso deve ser um valor positivo")
+	@NotNull
 	private Double weight;
 	private Double bmi;
 	private String rank;
@@ -20,7 +37,8 @@ public class MemberDTO implements Serializable {
 	public MemberDTO() {
 	}
 
-	public MemberDTO(Long id, String name, Integer age, Double height, Double weight, Double bmi, String rank, Trainer trainer) {
+	public MemberDTO(Long id, String name, Integer age, Double height, Double weight, Double bmi, String rank,
+			Trainer trainer) {
 		this.id = id;
 		this.name = name;
 		this.age = age;

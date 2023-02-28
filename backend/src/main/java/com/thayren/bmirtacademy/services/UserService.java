@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thayren.bmirtacademy.dto.RoleDTO;
 import com.thayren.bmirtacademy.dto.UserDTO;
+import com.thayren.bmirtacademy.dto.UserInsertDTO;
+import com.thayren.bmirtacademy.dto.UserUpdateDTO;
 import com.thayren.bmirtacademy.entities.Role;
 import com.thayren.bmirtacademy.entities.User;
 import com.thayren.bmirtacademy.repositories.RoleRepository;
@@ -44,18 +46,20 @@ public class UserService {
 	}
 
 	@Transactional
-	public UserDTO insert(UserDTO dto) {
+	public UserDTO insert(UserInsertDTO dto) {
 		User entity = new User();
 		copyDtoToEntity(dto, entity);
+		entity.setPassword(dto.getPassword());
 		entity = repository.save(entity);
 		return new UserDTO(entity);
 	}
 
 	@Transactional
-	public UserDTO update(Long id, UserDTO dto) {
+	public UserDTO update(Long id, UserUpdateDTO dto) {
 		try {
 			User entity = repository.getOne(id);
 			copyDtoToEntity(dto, entity);
+			entity.setPassword(dto.getPassword());
 			entity = repository.save(entity);
 
 			return new UserDTO(entity);
@@ -76,8 +80,6 @@ public class UserService {
 	private void copyDtoToEntity(UserDTO dto, User entity) {
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
-		entity.setPassword(dto.getPassword());
-
 		entity.getRoles().clear();
 
 		for (RoleDTO roleDto : dto.getRoles()) {

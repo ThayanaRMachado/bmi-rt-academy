@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.thayren.bmirtacademy.dto.UserDTO;
+import com.thayren.bmirtacademy.dto.UserInsertDTO;
+import com.thayren.bmirtacademy.dto.UserUpdateDTO;
 import com.thayren.bmirtacademy.services.UserService;
 
 @RestController
@@ -51,7 +53,7 @@ public class UserResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserDTO dto) {
+	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto) {
 		UserDTO userDto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(userDto.getId())
 				.toUri();
@@ -59,7 +61,7 @@ public class UserResource {
 	}
 
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserDTO dto) {
+	public ResponseEntity<UserDTO> update(@PathVariable Long id, @Valid @RequestBody UserUpdateDTO dto) {
 		UserDTO userDto = service.update(id, dto);
 		return ResponseEntity.ok().body(userDto);
 	}

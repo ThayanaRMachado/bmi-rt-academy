@@ -26,4 +26,9 @@ public class MemberFactory {
 		return memberDto;
 	}
 
+	public static Member createEmptyMember() {
+		Trainer trainer = new Trainer(1L, "Rafael Miranda Souza", 37, "999.999.999-99", "31 9 9999-9999");
+		return new Member(1L, "", 0, 0.0, 0.0, 0.0, "", trainer);
+	}
+
 }

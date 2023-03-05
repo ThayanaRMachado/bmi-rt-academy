@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { TabViewModule } from 'primeng/tabview';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginModule } from './security/login/login.module';
 
 @NgModule({
   declarations: [
@@ -13,7 +12,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TabViewModule
+    LoginModule
   ],
   providers: [],
   bootstrap: [AppComponent]

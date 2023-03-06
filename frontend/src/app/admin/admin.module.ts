@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin.component';
-import { TrainersModule } from './trainers/trainers.module';
+import { AdminRoutingModule } from './admin-routing.module';
 
 
 
@@ -10,7 +10,9 @@ import { TrainersModule } from './trainers/trainers.module';
     AdminComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
+    AdminRoutingModule
   ],
   exports: [
     AdminComponent

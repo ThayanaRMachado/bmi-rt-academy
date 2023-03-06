@@ -1,3 +1,4 @@
+import { TrainersRoutingModule } from './trainers-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TrainerListComponent } from './trainer-list/trainer-list.component';
@@ -11,7 +12,9 @@ import { TrainerFormComponent } from './trainer-form/trainer-form.component';
     TrainerFormComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+
+    TrainersRoutingModule
   ],
   exports: [
     TrainerListComponent,

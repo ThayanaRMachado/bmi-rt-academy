@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MessageComponent } from './message/message.component';
 import { FilterComponent } from './filter/filter.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -13,7 +14,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     NavbarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports:[
     MessageComponent,

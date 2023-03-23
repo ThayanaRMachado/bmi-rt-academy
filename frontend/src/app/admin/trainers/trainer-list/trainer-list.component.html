@@ -1,1 +1,72 @@
 <h1>Lista CRUD de instrutores</h1>
+<div class="trainer-filter-container">
+  <a routerLink="/admin/trainers/create">
+    <button class="btn btn-primary text-white btn-crud-new">
+      NOVO INSTRUTOR
+    </button>
+  </a>
+  <app-filter text="Digite o nome do instrutor"></app-filter>
+</div>
+<div class="trainer-card">
+  <div class="grid">
+    <div class="col-12">
+      <p-table
+        [value]="trainers"
+        [responsive]="true"
+        [paginator]="true"
+        [rows]="4"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nome</th>
+            <th>Idade</th>
+            <th>CPF</th>
+            <th>Celular</th>
+            <th class="actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-trainer>
+          <tr>
+            <td>
+              <span class="p-column-title">Nome</span>
+              {{ trainer.name }}
+            </td>
+
+            <td>
+              <span class="p-column-title">Idade</span>
+              {{ trainer.age }}
+            </td>
+
+            <td>
+              <span class="p-column-title">CPF</span>
+              {{ trainer.cpf }}
+            </td>
+
+            <td>
+              <span class="p-column-title">Celular</span>
+              {{ trainer.cellular }}
+            </td>
+
+            <td class="col-actions">
+              <a
+                pButton
+                icon="pi pi-pencil"
+                pTooltip="Editar"
+                tooltipPosition="top"
+                [routerLink]="['/admin/trainers', trainer.id]"
+              ></a>
+              <button
+                pButton
+                icon="pi pi-trash"
+                pTooltip="Excluir"
+                tooltipPosition="top"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+

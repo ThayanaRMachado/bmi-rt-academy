@@ -31,10 +31,6 @@ import { InputTextModule } from 'primeng/inputtext';
     InputTextModule,
     InputMaskModule,
     TrainersRoutingModule,
-  ],
-  exports: [
-    TrainerListComponent,
-    TrainerFormComponent
   ]
 })
 export class TrainersModule { }

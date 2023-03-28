@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
@@ -12,6 +13,7 @@ import { TrainerListComponent } from './trainer-list/trainer-list.component';
 import { TrainerFormComponent } from './trainer-form/trainer-form.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { InputTextModule } from 'primeng/inputtext';
+import { TrainerService } from './trainer.service';
 
 
 
@@ -23,6 +25,7 @@ import { InputTextModule } from 'primeng/inputtext';
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
 
     ButtonModule,
     SharedModule,
@@ -31,6 +34,7 @@ import { InputTextModule } from 'primeng/inputtext';
     InputTextModule,
     InputMaskModule,
     TrainersRoutingModule,
-  ]
+  ],
+  providers: [TrainerService],
 })
 export class TrainersModule { }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Trainer } from 'src/app/models/trainer';
+import { TrainerService } from '../trainer.service';
 
 @Component({
   selector: 'app-trainer-list',
@@ -7,30 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainerListComponent implements OnInit {
 
-  trainers = [
-    {
-      name: 'José Sardinha',
-      age: '30',
-      cpf: '000.000.000-00',
-      cellular: '31 9 1111-1111'
-    },
-    {
-      name: 'Marcelo Zulu',
-      age: '30',
-      cpf: '000.000.000-00',
-      cellular: '31 9 1111-1111'
-    },
-    {
-      name: 'Luiz Dias',
-      age: '30',
-      cpf: '000.000.000-00',
-      cellular: '31 9 1111-1111'
-    },
-  ]
+  trainers: Trainer[]  = []
 
-  constructor() { }
+  constructor(private trainerService: TrainerService) { }
 
   ngOnInit(): void {
+    this.list();
+  }
+
+  list(): void {
+    this.trainerService
+      .list()
+      .subscribe((data) => {
+        this.trainers = data.content;
+      });
   }
 
 }

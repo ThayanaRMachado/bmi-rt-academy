@@ -44,15 +44,19 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		}
 		
 		http.authorizeRequests()
-		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET, "/members/**", "/trainers/**").hasAnyRole("FUNCTIONARY", "ADMIN")
-		.antMatchers(HttpMethod.POST, "/members/**").hasAnyRole("FUNCTIONARY", "ADMIN")
-		.antMatchers(HttpMethod.PUT, "/members/**").hasAnyRole("FUNCTIONARY", "ADMIN")
-		.antMatchers(HttpMethod.POST, "/trainers/**").hasRole("ADMIN")
-		.antMatchers(HttpMethod.PUT, "/trainers/**").hasRole("ADMIN")
-		.antMatchers(HttpMethod.DELETE, "/members/**", "/trainers/**").hasRole("ADMIN")
-		.antMatchers("/users/**").hasRole("ADMIN")
-		.anyRequest().authenticated();
+		.antMatchers(PUBLIC).permitAll();
+		/*
+		 * .antMatchers(HttpMethod.GET, "/members/**",
+		 * "/trainers/**").hasAnyRole("FUNCTIONARY", "ADMIN")
+		 * .antMatchers(HttpMethod.POST, "/members/**").hasAnyRole("FUNCTIONARY",
+		 * "ADMIN") .antMatchers(HttpMethod.PUT,
+		 * "/members/**").hasAnyRole("FUNCTIONARY", "ADMIN")
+		 * .antMatchers(HttpMethod.POST, "/trainers/**").hasRole("ADMIN")
+		 * .antMatchers(HttpMethod.PUT, "/trainers/**").hasRole("ADMIN")
+		 * .antMatchers(HttpMethod.DELETE, "/members/**",
+		 * "/trainers/**").hasRole("ADMIN") .antMatchers("/users/**").hasRole("ADMIN")
+		 * .anyRequest().authenticated();
+		 */
 		
 		http.cors().configurationSource(corsConfigurationSource());
 	}

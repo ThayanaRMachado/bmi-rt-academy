@@ -14,7 +14,11 @@
         [value]="trainers"
         [responsive]="true"
         [paginator]="true"
-        [rows]="4"
+        [rows]="pagination.linesPerPage"
+        [lazy]="true"
+        [totalRecords]="totalElements"
+        (onLazyLoad)="changePage($event)"
+        #trainerTable
       >
         <ng-template pTemplate="header">
           <tr>
